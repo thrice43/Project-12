@@ -13,32 +13,55 @@ struct Player{
 
 
 void getPlayerInfo(Player &onePlayer){
-	cout << "\nPlayer Name: ";
+	cout << "\n" << setw(26) << "Player Name: ";
 	getline(cin, onePlayer.name);
-	cout << "Jersey Number: " ;
+	cout << setw(26) << "Jersey Number: " ;
 	getline(cin ,onePlayer.number );    
-	cout << "Total Points this Season: " ; 
+	cout << setw(26) << "Total Points this Season: " ; 
 	cin >> onePlayer.points ;    
 	cin.ignore();
 }
 void printPlayerInfo(Player pl[] ){
+	int totScore = 0 ; 
+	int width = 15 ; 
 	for ( int i = 0 ; i < 3 ; i++ ) {
-		cout << headings[i] << setw(10) ; 
+		cout << headings[i] << setw(15) ; 
 		for ( int j =0 ; j < 3 ; j++){			
 			if ( i == 0 ) {
-				cout << setw(10) << pl[j].name ;
+				if ( j == 0 ){
+					width = 10 ; 
+				}else{
+					width = 3 ; 
+				}
+				cout << setw(width) << pl[j].name << "     ";
+				cout << "|" ; 
 			}
 			if ( i == 1 ) {
-				cout << setw(10) << pl[j].number;
+				if ( j == 0 ) {
+					width = 8; 
+				}
+				else{ 
+					width = 3; 
+				}
+				cout << setw(width) << pl[j].number <<  "     ";
+				cout << "|" ; 
 			}
 			if ( i == 2 ){
-				cout << setw(8) << pl[j].points ;
+				if ( j == 0 ){ 
+					width = 2 ; 
+				}
+				else { 
+					width = 3; 
+				}
+				cout << setw(width) << pl[j].points << "     ";
+				totScore+=pl[j].points ;
+				cout << "|" ; 
 			}
-			cout << setw(10) << " || " ;
+			cout << setw(10) << " " ;
 		}
 		cout << endl;
 	}
-	
+	cout << "\nTotal Score for all: " << totScore << endl ; 
 }
 int main(){
     Player littleLeague[3] ; 
@@ -47,8 +70,4 @@ int main(){
 		getPlayerInfo(littleLeague[i]) ;	
 	}
 	printPlayerInfo(littleLeague) ; 
-	cin  >> totPoints ;    
-    
-    
- 
 }
